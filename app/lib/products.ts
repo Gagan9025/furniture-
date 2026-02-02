@@ -1,4 +1,23 @@
 // Product data management
+
+// Event system for real-time updates
+type ProductUpdateCallback = (action: 'CREATE' | 'UPDATE' | 'DELETE', product: Product) => void;
+const updateCallbacks: ProductUpdateCallback[] = [];
+
+export function subscribeToProductUpdates(callback: ProductUpdateCallback) {
+  updateCallbacks.push(callback);
+  return () => {
+    const index = updateCallbacks.indexOf(callback);
+    if (index > -1) {
+      updateCallbacks.splice(index, 1);
+    }
+  };
+}
+
+export function broadcastProductUpdate(action: 'CREATE' | 'UPDATE' | 'DELETE', product: Product) {
+  updateCallbacks.forEach(callback => callback(action, product));
+}
+
 export interface Product {
   id: number;
   name: string;

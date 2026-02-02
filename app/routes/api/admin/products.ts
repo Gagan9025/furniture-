@@ -1,5 +1,5 @@
 import { redirect } from "react-router";
-import { ProductManager } from "../../../lib/products";
+import { ProductManager, broadcastProductUpdate } from "../../../lib/products";
 import { AdminSession } from "../../../lib/admin-auth";
 
 // GET - Get all products
@@ -36,6 +36,9 @@ export async function action({ request }: { request: Request }) {
     price,
     category
   });
+  
+  // Broadcast update to all clients
+  broadcastProductUpdate('CREATE', newProduct);
   
   return { success: true, product: newProduct };
 }

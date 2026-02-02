@@ -1,6 +1,7 @@
 import type { Route } from "./+types/products";
 import { Link, useNavigate } from "react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { ProductManager, subscribeToProductUpdates } from "../lib/products";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -9,73 +10,10 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-// Furniture products data
-const products = [
-  {
-    id: 1,
-    name: "Modern Wooden Dining Table",
-    description: "Elegant 6-seater dining table with premium wood finish",
-    image: "https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?w=400&h=300&fit=crop",
-    price: 12999,
-    category: "Dining"
-  },
-  {
-    id: 2,
-    name: "Luxury Sofa Set",
-    description: "3-seater premium fabric sofa with wooden frame",
-    image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&h=300&fit=crop",
-    price: 24999,
-    category: "Living Room"
-  },
-  {
-    id: 3,
-    name: "King Size Bed",
-    description: "Solid wood king size bed with storage",
-    image: "https://images.unsplash.com/photo-1613047515355-7047084b56d8?w=400&h=300&fit=crop",
-    price: 18999,
-    category: "Bedroom"
-  },
-  {
-    id: 4,
-    name: "Office Study Table",
-    description: "Modern workspace desk with drawers and cable management",
-    image: "https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=400&h=300&fit=crop",
-    price: 8999,
-    category: "Office"
-  },
-  {
-    id: 5,
-    name: "Wardrobe with Mirror",
-    description: "Double door wardrobe with full-length mirror",
-    image: "https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=400&h=300&fit=crop",
-    price: 15999,
-    category: "Bedroom"
-  },
-  {
-    id: 6,
-    name: "Coffee Table Set",
-    description: "3-piece coffee table set with tempered glass top",
-    image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=400&h=300&fit=crop",
-    price: 6999,
-    category: "Living Room"
-  },
-  {
-    id: 7,
-    name: "Bookshelf",
-    description: "5-tier wooden bookshelf with adjustable shelves",
-    image: "https://images.unsplash.com/photo-1471039497385-b6d6ba609f9c?w=400&h=300&fit=crop",
-    price: 4999,
-    category: "Storage"
-  },
-  {
-    id: 8,
-    name: "Dressing Table",
-    description: "Vanity dressing table with mirror and stool",
-    image: "https://images.unsplash.com/photo-1631678429419-0fb8490d7939?w=400&h=300&fit=crop",
-    price: 9999,
-    category: "Bedroom"
-  }
-];
+// Get products from centralized ProductManager - fetched dynamically
+function getProducts() {
+  return ProductManager.getAll();
+}
 
 // Cart item type
 type CartItem = {
@@ -89,7 +27,23 @@ type CartItem = {
 export default function Products() {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [showCart, setShowCart] = useState(false);
+  const [products, setProducts] = useState(getProducts());
   const navigate = useNavigate();
+
+  // Subscribe to product updates
+  useEffect(() => {
+    const unsubscribe = subscribeToProductUpdates((action, product) => {
+      // Refresh products when any admin action occurs
+      setProducts(getProducts());
+      
+      // Show notification
+      const actionText = action === 'CREATE' ? 'added' : 
+                        action === 'UPDATE' ? 'updated' : 'deleted';
+      console.log(`Product ${product.name} has been ${actionText}`);
+    });
+    
+    return unsubscribe;
+  }, []);
 
   // Add to cart function
   const addToCart = (product: typeof products[0]) => {
@@ -137,6 +91,11 @@ export default function Products() {
   // Format price
   const formatPrice = (price: number) => {
     return `₹${price.toLocaleString('en-IN')}`;
+  };
+
+  // Refresh products manually when needed
+  const refreshProducts = () => {
+    setProducts(getProducts());
   };
 
   // Proceed to checkout

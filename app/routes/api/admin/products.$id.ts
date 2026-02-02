@@ -1,5 +1,5 @@
 import { redirect } from "react-router";
-import { ProductManager } from "../../../lib/products";
+import { ProductManager, broadcastProductUpdate } from "../../../lib/products";
 import { AdminSession } from "../../../lib/admin-auth";
 
 // GET - Get single product
@@ -48,6 +48,9 @@ export async function action({ request, params }: { request: Request; params: { 
   if (!updatedProduct) {
     return { error: "Product not found" };
   }
+  
+  // Broadcast update to all clients
+  broadcastProductUpdate('UPDATE', updatedProduct);
   
   return { success: true, product: updatedProduct };
 }
