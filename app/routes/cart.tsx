@@ -152,70 +152,70 @@ export default function Cart() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-royal-blue-50 to-royal-silver-50">
       {/* Page Header */}
-      <div className="bg-white py-6">
+      <div className="bg-white py-8 border-b-2 border-royal-blue-100">
         <div className="container mx-auto px-4">
-          <h1 className="text-3xl font-bold text-gray-800 text-center">Your Cart</h1>
+          <h1 className="text-3xl font-bold text-royal-blue-800 text-center">Your Royal Cart</h1>
         </div>
       </div>
 
       {cartItems.length === 0 ? (
         // Empty Cart State
-        <div className="container mx-auto px-4 py-16 text-center">
+        <div className="container mx-auto px-4 py-20 text-center">
           <div className="max-w-md mx-auto">
-            <div className="text-8xl mb-6">🛒</div>
-            <h2 className="text-3xl font-bold text-gray-800 mb-4">Your Cart is Empty</h2>
-            <p className="text-gray-600 mb-8">
-              Looks like you haven't added any items to your cart yet.
+            <div className="text-8xl mb-6 text-royal-silver-300">🛒</div>
+            <h2 className="text-3xl font-bold text-royal-silver-800 mb-4">Your Royal Cart is Empty</h2>
+            <p className="text-royal-silver-600 mb-8">
+              Discover our premium collection and experience royal luxury.
             </p>
             <Link 
               to="/products"
-              className="inline-block bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-300"
+              className="inline-block royal-btn-primary text-lg px-8 py-4 shadow-lg hover:shadow-xl"
             >
-              Browse Products
+              Browse Royal Products
             </Link>
           </div>
         </div>
       ) : (
         // Cart with Items
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-4 py-12">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Cart Items Section */}
             <div className="lg:col-span-2">
-              <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
-                <h2 className="text-2xl font-bold text-gray-800 mb-6">Order Summary</h2>
+              <div className="royal-card p-6 mb-6">
+                <h2 className="text-2xl font-bold text-royal-silver-800 mb-6">Royal Order Summary</h2>
                 
                 <div className="space-y-4">
                   {cartItems.map((item) => (
-                    <div key={item.id} className="flex items-center border-b pb-4 last:border-b-0">
+                    <div key={item.id} className="flex items-center border-b border-royal-silver-100 pb-4 last:border-b-0 hover:bg-royal-blue-50 p-3 rounded-lg transition-all duration-300">
                       <img 
                         src={item.image} 
                         alt={item.name}
-                        className="w-20 h-20 object-cover rounded-lg mr-4"
+                        className="w-20 h-20 object-cover rounded-lg mr-4 border-2 border-royal-silver-200"
                       />
                       <div className="flex-1">
-                        <h3 className="font-semibold text-gray-800">{item.name}</h3>
-                        <p className="text-green-600 font-bold text-lg">{formatPrice(item.price)}</p>
+                        <h3 className="font-semibold text-royal-silver-800">{item.name}</h3>
+                        <p className="text-royal-gold-600 font-bold text-lg">{formatPrice(item.price)}</p>
                       </div>
-                      <div className="flex items-center">
+                      <div className="flex items-center bg-royal-silver-100 rounded-full p-1">
                         <button 
                           onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                          className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center hover:bg-gray-300 transition-colors"
+                          className="w-10 h-10 rounded-full bg-white flex items-center justify-center hover:bg-royal-blue-100 text-royal-blue-600 transition-colors"
                         >
                           -
                         </button>
-                        <span className="mx-4 w-12 text-center font-semibold">{item.quantity}</span>
+                        <span className="mx-4 w-12 text-center font-semibold text-royal-silver-700">{item.quantity}</span>
                         <button 
                           onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                          className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center hover:bg-gray-300 transition-colors"
+                          className="w-10 h-10 rounded-full bg-white flex items-center justify-center hover:bg-royal-blue-100 text-royal-blue-600 transition-colors"
                         >
                           +
                         </button>
                       </div>
                       <button 
                         onClick={() => removeFromCart(item.id)}
-                        className="ml-6 text-red-500 hover:text-red-700 transition-colors"
+                        className="ml-6 text-royal-silver-400 hover:text-red-500 hover:bg-red-50 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300"
                         title="Remove item"
                       >
                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -230,31 +230,31 @@ export default function Cart() {
 
             {/* Order Form Section */}
             <div className="lg:col-span-1">
-              <div className="bg-white rounded-2xl shadow-lg p-6 sticky top-24">
-                <h2 className="text-2xl font-bold text-gray-800 mb-6">Order Details</h2>
+              <div className="royal-card p-6 sticky top-24">
+                <h2 className="text-2xl font-bold text-royal-silver-800 mb-6">Royal Order Details</h2>
                 
                 {/* Cart Total */}
-                <div className="mb-6 p-4 bg-gray-50 rounded-lg">
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="text-gray-600">Subtotal</span>
-                    <span className="font-semibold">{formatPrice(cartTotal)}</span>
+                <div className="mb-6 p-4 bg-royal-blue-50 rounded-xl border border-royal-blue-100">
+                  <div className="flex justify-between items-center mb-3">
+                    <span className="text-royal-silver-600">Subtotal</span>
+                    <span className="font-semibold text-royal-silver-800">{formatPrice(cartTotal)}</span>
                   </div>
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="text-gray-600">Delivery</span>
-                    <span className="font-semibold text-green-600">Free</span>
+                  <div className="flex justify-between items-center mb-3">
+                    <span className="text-royal-silver-600">Royal Delivery</span>
+                    <span className="font-semibold text-royal-gold-600">Free</span>
                   </div>
-                  <div className="border-t pt-2 mt-2">
+                  <div className="border-t border-royal-blue-200 pt-3 mt-3">
                     <div className="flex justify-between items-center">
-                      <span className="text-lg font-bold text-gray-800">Total</span>
-                      <span className="text-2xl font-bold text-green-600">{formatPrice(cartTotal)}</span>
+                      <span className="text-lg font-bold text-royal-silver-800">Royal Total</span>
+                      <span className="text-2xl font-bold text-royal-gold-600">{formatPrice(cartTotal)}</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Customer Form */}
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-5">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
+                    <label htmlFor="name" className="block text-sm font-semibold text-royal-silver-700 mb-2">
                       Full Name *
                     </label>
                     <input
@@ -263,8 +263,8 @@ export default function Cart() {
                       name="name"
                       value={formData.name}
                       onChange={handleInputChange}
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-colors ${
-                        errors.name ? 'border-red-500' : 'border-gray-300'
+                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-royal-blue-500 focus:border-royal-blue-500 transition-colors ${
+                        errors.name ? 'border-red-500' : 'border-royal-silver-300'
                       }`}
                       placeholder="Enter your full name"
                     />
@@ -272,7 +272,7 @@ export default function Cart() {
                   </div>
 
                   <div>
-                    <label htmlFor="mobile" className="block text-sm font-semibold text-gray-700 mb-2">
+                    <label htmlFor="mobile" className="block text-sm font-semibold text-royal-silver-700 mb-2">
                       Mobile Number *
                     </label>
                     <input
@@ -281,8 +281,8 @@ export default function Cart() {
                       name="mobile"
                       value={formData.mobile}
                       onChange={handleInputChange}
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-colors ${
-                        errors.mobile ? 'border-red-500' : 'border-gray-300'
+                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-royal-blue-500 focus:border-royal-blue-500 transition-colors ${
+                        errors.mobile ? 'border-red-500' : 'border-royal-silver-300'
                       }`}
                       placeholder="Enter 10-digit mobile number"
                       maxLength={10}
@@ -291,7 +291,7 @@ export default function Cart() {
                   </div>
 
                   <div>
-                    <label htmlFor="address" className="block text-sm font-semibold text-gray-700 mb-2">
+                    <label htmlFor="address" className="block text-sm font-semibold text-royal-silver-700 mb-2">
                       Delivery Address *
                     </label>
                     <textarea
@@ -300,8 +300,8 @@ export default function Cart() {
                       value={formData.address}
                       onChange={handleInputChange}
                       rows={3}
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-colors resize-none ${
-                        errors.address ? 'border-red-500' : 'border-gray-300'
+                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-royal-blue-500 focus:border-royal-blue-500 transition-colors resize-none ${
+                        errors.address ? 'border-red-500' : 'border-royal-silver-300'
                       }`}
                       placeholder="Enter your complete address"
                     />
@@ -309,7 +309,7 @@ export default function Cart() {
                   </div>
 
                   <div>
-                    <label htmlFor="notes" className="block text-sm font-semibold text-gray-700 mb-2">
+                    <label htmlFor="notes" className="block text-sm font-semibold text-royal-silver-700 mb-2">
                       Additional Notes (Optional)
                     </label>
                     <textarea
@@ -318,16 +318,16 @@ export default function Cart() {
                       value={formData.notes}
                       onChange={handleInputChange}
                       rows={3}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-colors resize-none"
-                      placeholder="Any special instructions or requirements"
+                      className="w-full px-4 py-3 border border-royal-silver-300 rounded-lg focus:ring-2 focus:ring-royal-blue-500 focus:border-royal-blue-500 transition-colors resize-none"
+                      placeholder="Any special royal instructions or requirements"
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-6 rounded-lg transition-colors duration-300 text-lg shadow-lg hover:shadow-xl"
+                    className="w-full royal-btn-primary text-lg font-bold py-4 shadow-lg hover:shadow-xl"
                   >
-                    Place Order
+                    Place Royal Order
                   </button>
                 </form>
               </div>
@@ -337,9 +337,16 @@ export default function Cart() {
       )}
 
       {/* Footer */}
-      <footer className="bg-gray-800 text-white py-8 mt-16">
+      <footer className="bg-gradient-to-r from-royal-blue-800 to-royal-blue-900 text-white py-12 mt-20">
         <div className="container mx-auto px-4 text-center">
-          <p className="text-gray-300">© 2024 Royal Hood Murli. All rights reserved.</p>
+          <div className="mb-6">
+            <h3 className="text-2xl font-bold mb-2">ROYAL HOOD MURLI</h3>
+            <p className="text-royal-blue-200">Premium Interior Solutions Since 2024</p>
+          </div>
+          <div className="border-t border-royal-blue-700 pt-6">
+            <p className="text-royal-blue-200">© 2024 Royal Hood Murli. All rights reserved.</p>
+            <p className="text-royal-blue-300 text-sm mt-2">Crafted with Royal Excellence</p>
+          </div>
         </div>
       </footer>
     </div>

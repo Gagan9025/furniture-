@@ -44,53 +44,60 @@ const designPackages = [
 
 export default function InteriorDesigning() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50">
+    <div className="min-h-screen bg-gradient-to-br from-royal-gold-50 to-royal-blue-50">
       {/* Page Header */}
-      <div className="bg-white py-6">
+      <div className="bg-white py-8 border-b-2 border-royal-gold-200">
         <div className="container mx-auto px-4">
-          <h1 className="text-3xl font-bold text-gray-800 text-center">Interior Designing</h1>
+          <h1 className="text-3xl font-bold text-royal-gold-700 text-center">Royal Interior Designing</h1>
         </div>
       </div>
 
       {/* Hero Section */}
-      <section className="py-12 bg-gradient-to-r from-amber-500 to-orange-500">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Transform Your Space
+      <section className="py-16 royal-gradient-gold relative overflow-hidden">
+        <div className="absolute inset-0 bg-black opacity-10"></div>
+        <div className="container mx-auto px-4 text-center relative z-10">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 fade-in">
+            Transform Your Royal Space
           </h2>
-          <p className="text-xl text-amber-100 max-w-2xl mx-auto">
-            Professional interior design solutions tailored to your style and budget
+          <p className="text-xl text-royal-gold-100 max-w-3xl mx-auto slide-up">
+            Royal interior design solutions tailored to your style and budget with premium craftsmanship
           </p>
         </div>
+        <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white to-transparent"></div>
       </section>
 
       {/* Packages Section */}
-      <section className="py-16">
+      <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="royal-section-title">Royal Design Packages</h2>
+            <p className="royal-section-subtitle">Choose from our curated packages or request a custom royal design solution</p>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {designPackages.map((pkg) => (
-              <div key={pkg.id} className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl transition-all duration-300">
+              <div key={pkg.id} className="royal-card overflow-hidden group hover:-translate-y-2">
                 {/* Image */}
-                <div className="h-48 overflow-hidden">
+                <div className="h-52 overflow-hidden relative">
                   <img 
                     src={pkg.image} 
                     alt={pkg.name}
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
                 
                 {/* Content */}
                 <div className="p-6">
-                  <h3 className="text-2xl font-bold text-gray-800 mb-2">{pkg.name}</h3>
-                  <p className="text-gray-600 mb-4">{pkg.description}</p>
+                  <h3 className="text-2xl font-bold text-royal-silver-800 mb-3 group-hover:text-royal-gold-600 transition-colors">{pkg.name}</h3>
+                  <p className="text-royal-silver-600 mb-5 leading-relaxed">{pkg.description}</p>
                   
                   {/* Materials */}
-                  <div className="mb-4">
-                    <h4 className="font-semibold text-gray-800 mb-2">Materials Included:</h4>
-                    <ul className="text-sm text-gray-600 space-y-1">
+                  <div className="mb-5">
+                    <h4 className="font-semibold text-royal-silver-800 mb-2">Premium Materials:</h4>
+                    <ul className="text-sm text-royal-silver-600 space-y-1">
                       {pkg.materials.map((material, index) => (
                         <li key={index} className="flex items-center">
-                          <span className="text-green-500 mr-2">✓</span>
+                          <span className="text-royal-gold-500 mr-2 text-lg">✓</span>
                           {material}
                         </li>
                       ))}
@@ -99,11 +106,11 @@ export default function InteriorDesigning() {
                   
                   {/* Features */}
                   <div className="mb-6">
-                    <h4 className="font-semibold text-gray-800 mb-2">Features:</h4>
-                    <ul className="text-sm text-gray-600 space-y-1">
+                    <h4 className="font-semibold text-royal-silver-800 mb-2">Royal Features:</h4>
+                    <ul className="text-sm text-royal-silver-600 space-y-1">
                       {pkg.features.map((feature, index) => (
                         <li key={index} className="flex items-center">
-                          <span className="text-amber-500 mr-2">•</span>
+                          <span className="text-royal-blue-500 mr-2">•</span>
                           {feature}
                         </li>
                       ))}
@@ -111,26 +118,26 @@ export default function InteriorDesigning() {
                   </div>
                   
                   {/* Price */}
-                  <div className="mb-6">
-                    <div className="text-3xl font-bold text-amber-600">Starting at {pkg.price}</div>
-                    <p className="text-sm text-gray-500 mt-1">*Price may vary based on customization</p>
+                  <div className="mb-6 bg-royal-gold-50 rounded-xl p-4">
+                    <div className="text-3xl font-bold text-royal-gold-600">Starting at {pkg.price}</div>
+                    <p className="text-sm text-royal-silver-500 mt-1">*Price may vary based on royal customization</p>
                   </div>
                   
                   {/* Buttons */}
                   <div className="space-y-3">
                     <button 
-                      onClick={() => alert(`Exact pricing details for ${pkg.name}: ${pkg.price}`)}
-                      className="w-full bg-amber-500 hover:bg-amber-600 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-300"
+                      onClick={() => alert(`Royal pricing details for ${pkg.name}: ${pkg.price}`)}
+                      className="w-full royal-btn-secondary"
                     >
-                      View Pricing Details
+                      View Royal Pricing
                     </button>
                     <a 
                       href={pkg.whatsappLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full block text-center bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-300"
+                      className="w-full block text-center royal-btn-primary"
                     >
-                      Enquire / Custom Design
+                      Enquire / Custom Royal Design
                     </a>
                   </div>
                 </div>
@@ -141,27 +148,34 @@ export default function InteriorDesigning() {
       </section>
 
       {/* Custom Design Section */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-gradient-to-br from-royal-blue-50 to-royal-silver-50">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-gray-800 mb-4">Need Something Custom?</h2>
-          <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
-            Have a unique vision? Our expert designers can create custom solutions tailored to your specific requirements and preferences.
+          <h2 className="royal-section-title">Need Something Royal & Custom?</h2>
+          <p className="royal-section-subtitle">
+            Have a unique royal vision? Our expert designers can create custom solutions tailored to your specific requirements and preferences with royal attention to detail.
           </p>
           <a 
-            href="https://wa.me/919876543210?text=I'd%20like%20to%20discuss%20a%20custom%20interior%20design%20project"
+            href="https://wa.me/919876543210?text=I'd%20like%20to%20discuss%20a%20royal%20custom%20interior%20design%20project"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-semibold py-3 px-8 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl"
+            className="inline-block royal-btn-primary text-lg px-10 py-4 shadow-xl hover:shadow-2xl"
           >
-            Discuss Custom Project
+            Discuss Royal Custom Project
           </a>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-800 text-white py-8">
+      <footer className="bg-gradient-to-r from-royal-blue-800 to-royal-blue-900 text-white py-12">
         <div className="container mx-auto px-4 text-center">
-          <p className="text-gray-300">© 2024 Royal Hood Murli. All rights reserved.</p>
+          <div className="mb-6">
+            <h3 className="text-2xl font-bold mb-2">ROYAL HOOD MURLI</h3>
+            <p className="text-royal-blue-200">Premium Interior Solutions Since 2024</p>
+          </div>
+          <div className="border-t border-royal-blue-700 pt-6">
+            <p className="text-royal-blue-200">© 2024 Royal Hood Murli. All rights reserved.</p>
+            <p className="text-royal-blue-300 text-sm mt-2">Crafted with Royal Excellence</p>
+          </div>
         </div>
       </footer>
     </div>

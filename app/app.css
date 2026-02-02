@@ -3,13 +3,128 @@
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  
+  /* Royal Color Palette */
+  --color-royal-blue-50: #e6f0ff;
+  --color-royal-blue-100: #cce0ff;
+  --color-royal-blue-200: #99c0ff;
+  --color-royal-blue-300: #66a0ff;
+  --color-royal-blue-400: #3380ff;
+  --color-royal-blue-500: #0066ff;
+  --color-royal-blue-600: #0052cc;
+  --color-royal-blue-700: #003d99;
+  --color-royal-blue-800: #002966;
+  --color-royal-blue-900: #001433;
+  
+  --color-royal-gold-50: #fff8e6;
+  --color-royal-gold-100: #ffefcc;
+  --color-royal-gold-200: #ffe099;
+  --color-royal-gold-300: #ffd166;
+  --color-royal-gold-400: #ffc233;
+  --color-royal-gold-500: #ffb300;
+  --color-royal-gold-600: #cc8f00;
+  --color-royal-gold-700: #996b00;
+  --color-royal-gold-800: #664700;
+  --color-royal-gold-900: #332400;
+  
+  --color-royal-silver-50: #f8f9fa;
+  --color-royal-silver-100: #f1f3f5;
+  --color-royal-silver-200: #e9ecef;
+  --color-royal-silver-300: #dee2e6;
+  --color-royal-silver-400: #ced4da;
+  --color-royal-silver-500: #adb5bd;
+  --color-royal-silver-600: #6c757d;
+  --color-royal-silver-700: #495057;
+  --color-royal-silver-800: #343a40;
+  --color-royal-silver-900: #212529;
 }
 
 html,
 body {
-  @apply bg-white dark:bg-gray-950;
+  @apply bg-white;
+  font-family: 'Inter', sans-serif;
+  scroll-behavior: smooth;
+}
 
-  @media (prefers-color-scheme: dark) {
-    color-scheme: dark;
+/* Royal Design Utilities */
+.royal-gradient-blue {
+  @apply bg-gradient-to-r from-royal-blue-500 to-royal-blue-700;
+}
+
+.royal-gradient-gold {
+  @apply bg-gradient-to-r from-royal-gold-400 to-royal-gold-600;
+}
+
+.royal-gradient-silver {
+  @apply bg-gradient-to-r from-royal-silver-200 to-royal-silver-400;
+}
+
+.royal-card {
+  @apply bg-white rounded-2xl shadow-lg border border-royal-silver-200 hover:shadow-xl transition-all duration-300;
+}
+
+.royal-btn-primary {
+  @apply bg-royal-blue-500 hover:bg-royal-blue-600 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg;
+}
+
+.royal-btn-secondary {
+  @apply bg-royal-gold-500 hover:bg-royal-gold-600 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg;
+}
+
+.royal-btn-outline {
+  @apply border-2 border-royal-blue-500 text-royal-blue-500 hover:bg-royal-blue-500 hover:text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300;
+}
+
+.royal-section {
+  @apply py-16;
+}
+
+.royal-section-title {
+  @apply text-3xl md:text-4xl font-bold text-royal-silver-800 mb-4 text-center;
+}
+
+.royal-section-subtitle {
+  @apply text-xl text-royal-silver-600 max-w-2xl mx-auto text-center mb-12;
+}
+
+/* Animation Classes */
+.fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+.slide-up {
+  animation: slideUp 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(30px);
   }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-royal-silver-100;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-royal-blue-500 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-royal-blue-600;
 }
