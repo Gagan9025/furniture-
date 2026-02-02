@@ -63,18 +63,12 @@ const services = [
 export default function Services() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <Link to="/" className="text-2xl font-bold text-gray-800 hover:text-blue-600 transition-colors">
-              ← Back to Home
-            </Link>
-            <h1 className="text-3xl font-bold text-gray-800">Our Services</h1>
-            <div className="w-32"></div> {/* Spacer for alignment */}
-          </div>
+      {/* Page Header */}
+      <div className="bg-white py-6">
+        <div className="container mx-auto px-4">
+          <h1 className="text-3xl font-bold text-gray-800 text-center">Our Services</h1>
         </div>
-      </header>
+      </div>
 
       {/* Hero Section */}
       <section className="py-12 bg-gradient-to-r from-blue-500 to-cyan-500">

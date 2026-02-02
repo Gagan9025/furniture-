@@ -11,17 +11,15 @@ export function meta({}: Route.MetaArgs) {
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm">
-        <div className="container mx-auto px-4 py-6">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-2">
-              ROYAL HOOD MURLI
-            </h1>
-            <p className="text-lg text-gray-600">Professional Interior Solutions</p>
-          </div>
+      {/* Hero Section */}
+      <section className="bg-gradient-to-br from-amber-500 to-orange-500 py-16">
+        <div className="container mx-auto px-4 text-center">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+            ROYAL HOOD MURLI
+          </h1>
+          <p className="text-xl text-amber-100">Professional Interior Solutions</p>
         </div>
-      </header>
+      </section>
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-12">

@@ -149,13 +149,10 @@ export default function Products() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm sticky top-0 z-10">
-        <div className="container mx-auto px-4 py-4">
+      {/* Page Header with Cart */}
+      <div className="bg-white py-6 sticky top-16 z-10 shadow-sm">
+        <div className="container mx-auto px-4">
           <div className="flex items-center justify-between">
-            <Link to="/" className="text-2xl font-bold text-gray-800 hover:text-green-600 transition-colors">
-              ← Back to Home
-            </Link>
             <h1 className="text-3xl font-bold text-gray-800">Our Products</h1>
             <button 
               onClick={() => setShowCart(!showCart)}
@@ -170,7 +167,7 @@ export default function Products() {
             </button>
           </div>
         </div>
-      </header>
+      </div>
 
       {/* Hero Section */}
       <section className="py-12 bg-gradient-to-r from-green-500 to-emerald-500">
