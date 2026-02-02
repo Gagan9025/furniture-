@@ -3,8 +3,8 @@ import { Link } from "react-router";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "Royal Hood Murli - Home" },
-    { name: "description", content: "Professional Interior Designing, Services, and Furniture Products" },
+    { title: "Royal Furniture & Interior Designing - Home" },
+    { name: "description", content: "Professional Furniture & Interior Designing Services" },
   ];
 }
 
@@ -16,9 +16,9 @@ export default function Home() {
         <div className="absolute inset-0 bg-black opacity-10"></div>
         <div className="container mx-auto px-4 text-center relative z-10">
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 fade-in">
-            ROYAL HOOD MURLI
+Royal Furniture & Interior Designing
           </h1>
-          <p className="text-2xl text-royal-blue-100 max-w-2xl mx-auto slide-up">Premium Interior Solutions & Royal Service</p>
+          <p className="text-2xl text-royal-blue-100 max-w-2xl mx-auto slide-up">Premium Furniture & Interior Design Solutions</p>
         </div>
         <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white to-transparent"></div>
       </section>
@@ -135,12 +135,12 @@ export default function Home() {
       <footer className="bg-gradient-to-r from-royal-blue-800 to-royal-blue-900 text-white py-12 mt-20">
         <div className="container mx-auto px-4 text-center">
           <div className="mb-6">
-            <h3 className="text-2xl font-bold mb-2">ROYAL HOOD MURLI</h3>
-            <p className="text-royal-blue-200">Premium Interior Solutions Since 2024</p>
+            <h3 className="text-2xl font-bold mb-2">Royal Furniture & Interior Designing</h3>
+            <p className="text-royal-blue-200">Premium Furniture & Design Solutions Since 2024</p>
           </div>
           <div className="border-t border-royal-blue-700 pt-6">
-            <p className="text-royal-blue-200">© 2024 Royal Hood Murli. All rights reserved.</p>
-            <p className="text-royal-blue-300 text-sm mt-2">Crafted with Royal Excellence</p>
+            <p className="text-royal-blue-200">© 2024 Royal Furniture & Interior Designing. All rights reserved.</p>
+            <p className="text-royal-blue-300 text-sm mt-2">Crafted with Excellence</p>
           </div>
         </div>
       </footer>

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "Order Confirmation - Royal Hood Murli" },
+    { title: "Order Confirmation - Royal Furniture & Interior Designing" },
     { name: "description", content: "Your order has been placed successfully" },
   ];
 }
@@ -231,7 +231,7 @@ export default function OrderConfirmation() {
 
           {/* Thank You Message */}
           <div className="bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl shadow-lg p-8 text-center text-white mt-8">
-            <h3 className="text-2xl font-bold mb-2">Thank You for Choosing Royal Hood Murli!</h3>
+            <h3 className="text-2xl font-bold mb-2">Thank You for Choosing Royal Furniture & Interior Designing!</h3>
             <p className="text-green-100">
               We're committed to providing you with quality furniture and excellent service.
             </p>
@@ -242,7 +242,7 @@ export default function OrderConfirmation() {
       {/* Footer */}
       <footer className="bg-gray-800 text-white py-8 mt-16">
         <div className="container mx-auto px-4 text-center">
-          <p className="text-gray-300">© 2024 Royal Hood Murli. All rights reserved.</p>
+          <p className="text-gray-300">© 2024 Royal Furniture & Interior Designing. All rights reserved.</p>
         </div>
       </footer>
     </div>

@@ -20,7 +20,7 @@ export default function Navigation() {
           {/* Logo */}
           <Link to="/" className="text-3xl font-bold text-royal-blue-700 hover:text-royal-blue-500 transition-all duration-300 flex items-center">
             <span className="bg-gradient-to-r from-royal-blue-500 to-royal-gold-500 bg-clip-text text-transparent">
-              ROYAL HOOD MURLI
+Royal Furniture & Interior Designing
             </span>
           </Link>
 

@@ -3,8 +3,8 @@ import { Link } from "react-router";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "Services - Royal Hood Murli" },
-    { name: "description", content: "Professional cleaning, repair, and maintenance services for your home" },
+    { title: "Services - Royal Furniture & Interior Designing" },
+    { name: "description", content: "Professional furniture & interior design services for your home" },
   ];
 }
 
@@ -204,12 +204,12 @@ export default function Services() {
       <footer className="bg-gradient-to-r from-royal-blue-800 to-royal-blue-900 text-white py-12">
         <div className="container mx-auto px-4 text-center">
           <div className="mb-6">
-            <h3 className="text-2xl font-bold mb-2">ROYAL HOOD MURLI</h3>
-            <p className="text-royal-blue-200">Premium Interior Solutions Since 2024</p>
+            <h3 className="text-2xl font-bold mb-2">Royal Furniture & Interior Designing</h3>
+            <p className="text-royal-blue-200">Premium Furniture & Design Solutions Since 2024</p>
           </div>
           <div className="border-t border-royal-blue-700 pt-6">
-            <p className="text-royal-blue-200">© 2024 Royal Hood Murli. All rights reserved.</p>
-            <p className="text-royal-blue-300 text-sm mt-2">Crafted with Royal Excellence</p>
+            <p className="text-royal-blue-200">© 2024 Royal Furniture & Interior Designing. All rights reserved.</p>
+            <p className="text-royal-blue-300 text-sm mt-2">Crafted with Excellence</p>
           </div>
         </div>
       </footer>
