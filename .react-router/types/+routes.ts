@@ -29,12 +29,45 @@ type Pages = {
   "/order-confirmation": {
     params: {};
   };
+  "/admin/login": {
+    params: {};
+  };
+  "/admin/dashboard": {
+    params: {};
+  };
+  "/admin/products": {
+    params: {};
+  };
+  "/admin/products/create": {
+    params: {};
+  };
+  "/admin/products/edit/:id": {
+    params: {
+      "id": string;
+    };
+  };
+  "/api/admin/logout": {
+    params: {};
+  };
+  "/api/admin/products": {
+    params: {};
+  };
+  "/api/admin/products/:id": {
+    params: {
+      "id": string;
+    };
+  };
+  "/api/admin/products/:id/delete": {
+    params: {
+      "id": string;
+    };
+  };
 };
 
 type RouteFiles = {
   "root.tsx": {
     id: "root";
-    page: "/" | "/interior-designing" | "/services" | "/products" | "/cart" | "/order-confirmation";
+    page: "/" | "/interior-designing" | "/services" | "/products" | "/cart" | "/order-confirmation" | "/admin/login" | "/admin/dashboard" | "/admin/products" | "/admin/products/create" | "/admin/products/edit/:id" | "/api/admin/logout" | "/api/admin/products" | "/api/admin/products/:id" | "/api/admin/products/:id/delete";
   };
   "routes/home.tsx": {
     id: "routes/home";
@@ -60,6 +93,42 @@ type RouteFiles = {
     id: "routes/order-confirmation";
     page: "/order-confirmation";
   };
+  "routes/admin/login.tsx": {
+    id: "routes/admin/login";
+    page: "/admin/login";
+  };
+  "routes/admin/dashboard.tsx": {
+    id: "routes/admin/dashboard";
+    page: "/admin/dashboard";
+  };
+  "routes/admin/products/index.tsx": {
+    id: "routes/admin/products/index";
+    page: "/admin/products";
+  };
+  "routes/admin/products/create.tsx": {
+    id: "routes/admin/products/create";
+    page: "/admin/products/create";
+  };
+  "routes/admin/products/edit.$id.tsx": {
+    id: "routes/admin/products/edit.$id";
+    page: "/admin/products/edit/:id";
+  };
+  "routes/api/admin/logout.ts": {
+    id: "routes/api/admin/logout";
+    page: "/api/admin/logout";
+  };
+  "routes/api/admin/products.ts": {
+    id: "routes/api/admin/products";
+    page: "/api/admin/products";
+  };
+  "routes/api/admin/products.$id.ts": {
+    id: "routes/api/admin/products.$id";
+    page: "/api/admin/products/:id";
+  };
+  "routes/api/admin/products.$id.delete.ts": {
+    id: "routes/api/admin/products.$id.delete";
+    page: "/api/admin/products/:id/delete";
+  };
 };
 
 type RouteModules = {
@@ -70,4 +139,13 @@ type RouteModules = {
   "routes/products": typeof import("./app/routes/products.tsx");
   "routes/cart": typeof import("./app/routes/cart.tsx");
   "routes/order-confirmation": typeof import("./app/routes/order-confirmation.tsx");
+  "routes/admin/login": typeof import("./app/routes/admin/login.tsx");
+  "routes/admin/dashboard": typeof import("./app/routes/admin/dashboard.tsx");
+  "routes/admin/products/index": typeof import("./app/routes/admin/products/index.tsx");
+  "routes/admin/products/create": typeof import("./app/routes/admin/products/create.tsx");
+  "routes/admin/products/edit.$id": typeof import("./app/routes/admin/products/edit.$id.tsx");
+  "routes/api/admin/logout": typeof import("./app/routes/api/admin/logout.ts");
+  "routes/api/admin/products": typeof import("./app/routes/api/admin/products.ts");
+  "routes/api/admin/products.$id": typeof import("./app/routes/api/admin/products.$id.ts");
+  "routes/api/admin/products.$id.delete": typeof import("./app/routes/api/admin/products.$id.delete.ts");
 };
