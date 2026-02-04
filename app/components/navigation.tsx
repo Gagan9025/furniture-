@@ -19,20 +19,8 @@ export default function Navigation() {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3 hover:opacity-90 transition-all duration-300">
-            {/* Your Logo Image from Google Photos */}
-            <img 
-              src="https://photos.google.com/photo/AF1QipOhjsf46QkYLb3izAoSeOmRb8Gd0_1maJjYeT3J" 
-              alt="Royal Furniture Logo" 
-              className="w-12 h-12 object-contain rounded-lg shadow-lg"
-              onError={(e) => {
-                // Fallback if image doesn't load
-                const target = e.target as HTMLImageElement;
-                target.style.display = 'none';
-                target.nextElementSibling?.classList.remove('hidden');
-              }}
-            />
-            {/* Fallback placeholder if image fails to load */}
-            <div className="w-12 h-12 bg-gradient-to-r from-royal-blue-500 to-royal-gold-500 rounded-xl flex items-center justify-center shadow-lg hidden">
+            {/* Logo Placeholder - Replace with actual logo image */}
+            <div className="w-12 h-12 bg-gradient-to-r from-royal-blue-500 to-royal-gold-500 rounded-xl flex items-center justify-center shadow-lg">
               <span className="text-white font-bold text-xl">RF</span>
             </div>
             <div className="hidden sm:block">

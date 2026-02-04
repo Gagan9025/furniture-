@@ -1,20 +1,27 @@
 import type { ActionFunctionArgs, LoaderFunctionArgs } from "react-router";
 
 // Store for active connections (using global to persist across module reloads)
+// Using a safer approach for SSR compatibility
 declare global {
   var sseConnections: Map<string, ReadableStreamDefaultController>;
   var sseLastUpdate: any;
 }
 
-if (!global.sseConnections) {
-  global.sseConnections = new Map<string, ReadableStreamDefaultController>();
-}
-const connections = global.sseConnections;
+let connections: Map<string, ReadableStreamDefaultController>;
+let lastUpdate: any;
 
-if (!global.sseLastUpdate) {
-  global.sseLastUpdate = null;
+if (typeof global !== 'undefined' && global.sseConnections) {
+  connections = global.sseConnections;
+  lastUpdate = global.sseLastUpdate;
+} else {
+  connections = new Map<string, ReadableStreamDefaultController>();
+  lastUpdate = null;
+  
+  if (typeof global !== 'undefined') {
+    global.sseConnections = connections;
+    global.sseLastUpdate = lastUpdate;
+  }
 }
-let lastUpdate = global.sseLastUpdate;
 
 // SSE Headers
 const sseHeaders = {

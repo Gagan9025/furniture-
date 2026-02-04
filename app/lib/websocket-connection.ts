@@ -25,15 +25,18 @@ class WebSocketManager {
     // Poll the server periodically to check for updates
     const pollForUpdates = async () => {
       try {
-        // We'll use localStorage to simulate server-side updates
-        const lastUpdateStr = localStorage.getItem('__SIMULATED_SERVER_UPDATES__');
-        if (lastUpdateStr) {
-          const lastUpdate = JSON.parse(lastUpdateStr);
-          // Clear the stored update to prevent duplicate processing
-          localStorage.removeItem('__SIMULATED_SERVER_UPDATES__');
-          
-          // Process the update
-          this.processUpdate(lastUpdate);
+        // Check if localStorage is available (browser environment)
+        if (typeof localStorage !== 'undefined' && localStorage !== null) {
+          // We'll use localStorage to simulate server-side updates
+          const lastUpdateStr = localStorage.getItem('__SIMULATED_SERVER_UPDATES__');
+          if (lastUpdateStr) {
+            const lastUpdate = JSON.parse(lastUpdateStr);
+            // Clear the stored update to prevent duplicate processing
+            localStorage.removeItem('__SIMULATED_SERVER_UPDATES__');
+            
+            // Process the update
+            this.processUpdate(lastUpdate);
+          }
         }
       } catch (error) {
         console.error('Error polling for updates:', error);
@@ -85,6 +88,9 @@ export default wsManager;
 
 // Also export a function to simulate server updates
 export function simulateServerUpdate(update: ContentUpdate) {
-  // Store the update in localStorage for the simulated connection to pick up
-  localStorage.setItem('__SIMULATED_SERVER_UPDATES__', JSON.stringify(update));
+  // Check if localStorage is available (browser environment)
+  if (typeof localStorage !== 'undefined' && localStorage !== null) {
+    // Store the update in localStorage for the simulated connection to pick up
+    localStorage.setItem('__SIMULATED_SERVER_UPDATES__', JSON.stringify(update));
+  }
 }

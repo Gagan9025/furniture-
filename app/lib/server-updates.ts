@@ -8,10 +8,17 @@ declare global {
 }
 
 // Global store for active connections (in a real app, this would be in a database or Redis)
-if (!global.connections) {
-  global.connections = new Set();
+// Using a safer approach for SSR compatibility
+let connections: Set<any>;
+
+if (typeof global !== 'undefined' && global.connections) {
+  connections = global.connections;
+} else {
+  connections = new Set();
+  if (typeof global !== 'undefined') {
+    global.connections = connections;
+  }
 }
-const connections = global.connections;
 
 // Store for last known updates
 let lastUpdate: any = null;
@@ -38,7 +45,10 @@ export class ServerUpdateManager {
     // In a real implementation, send to server endpoint
     try {
       // For development environment, use simulated server update
-      simulateServerUpdate(update);
+      // Check if we're in browser environment before calling simulateServerUpdate
+      if (typeof window !== 'undefined') {
+        simulateServerUpdate(update);
+      }
       
       // Also try to send to server API endpoint that will broadcast to all clients via SSE
       /*const response = await fetch('/api/updates', {
