@@ -1,10 +1,20 @@
-// Product data management
+// Content data management
+
+// Types for different content updates
+export type ContentType = 'PRODUCT' | 'PACKAGE' | 'SERVICE';
+
+export interface ContentUpdate<T = any> {
+  type: ContentType;
+  action: 'CREATE' | 'UPDATE' | 'DELETE';
+  data: T;
+  id?: string | number;
+}
 
 // Event system for real-time updates
-type ProductUpdateCallback = (action: 'CREATE' | 'UPDATE' | 'DELETE', product: Product) => void;
-const updateCallbacks: ProductUpdateCallback[] = [];
+type ContentUpdateCallback = (update: ContentUpdate) => void;
+const updateCallbacks: ContentUpdateCallback[] = [];
 
-export function subscribeToProductUpdates(callback: ProductUpdateCallback) {
+export function subscribeToContentUpdates(callback: ContentUpdateCallback) {
   updateCallbacks.push(callback);
   return () => {
     const index = updateCallbacks.indexOf(callback);
@@ -14,9 +24,11 @@ export function subscribeToProductUpdates(callback: ProductUpdateCallback) {
   };
 }
 
-export function broadcastProductUpdate(action: 'CREATE' | 'UPDATE' | 'DELETE', product: Product) {
-  updateCallbacks.forEach(callback => callback(action, product));
+export function broadcastContentUpdate(update: ContentUpdate) {
+  updateCallbacks.forEach(callback => callback(update));
 }
+
+// Product data management
 
 export interface Product {
   id: number;
@@ -109,6 +121,15 @@ export class ProductManager {
     const newId = Math.max(...products.map(p => p.id), 0) + 1;
     const newProduct = { ...product, id: newId };
     products.push(newProduct);
+    
+    // Broadcast update to all clients
+    broadcastContentUpdate({
+      type: 'PRODUCT',
+      action: 'CREATE',
+      data: newProduct,
+      id: newProduct.id
+    });
+    
     return newProduct;
   }
   
@@ -117,13 +138,36 @@ export class ProductManager {
     if (index === -1) return null;
     
     products[index] = { ...products[index], ...updates };
-    return products[index];
+    const updatedProduct = products[index];
+    
+    // Broadcast update to all clients
+    broadcastContentUpdate({
+      type: 'PRODUCT',
+      action: 'UPDATE',
+      data: updatedProduct,
+      id: updatedProduct.id
+    });
+    
+    return updatedProduct;
   }
   
   static delete(id: number): boolean {
     const initialLength = products.length;
+    const deletedProduct = products.find(product => product.id === id);
     products = products.filter(product => product.id !== id);
-    return products.length < initialLength;
+    const success = products.length < initialLength;
+    
+    if (success && deletedProduct) {
+      // Broadcast update to all clients
+      broadcastContentUpdate({
+        type: 'PRODUCT',
+        action: 'DELETE',
+        data: deletedProduct,
+        id: deletedProduct.id
+      });
+    }
+    
+    return success;
   }
   
   static getCategories(): string[] {

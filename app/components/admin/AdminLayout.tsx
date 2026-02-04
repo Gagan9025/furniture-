@@ -10,7 +10,8 @@ interface SidebarItem {
 const sidebarItems: SidebarItem[] = [
   { name: "Dashboard", path: "/admin/dashboard", icon: "📊" },
   { name: "Products", path: "/admin/products", icon: "📦" },
-  { name: "Categories", path: "/admin/categories", icon: "🏷️" },
+  { name: "Design Packages", path: "/admin/packages", icon: "🎁" },
+  { name: "Services", path: "/admin/services", icon: "🔧" },
   { name: "Orders", path: "/admin/orders", icon: "🛒" },
   { name: "Settings", path: "/admin/settings", icon: "⚙️" }
 ];

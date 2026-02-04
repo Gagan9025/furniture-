@@ -1,5 +1,8 @@
 import type { Route } from "./+types/services";
 import { Link } from "react-router";
+import { useState, useEffect } from "react";
+import { ContentManager, type Service } from "../lib/content-manager";
+import { subscribeToContentUpdates, type ContentUpdate, type ContentType } from "../lib/products";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -8,59 +11,32 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-// Services data
-const services = [
-  {
-    id: 1,
-    name: "Water Tank Cleaning",
-    description: "Thorough cleaning and sanitization of water storage tanks to ensure safe drinking water",
-    price: "₹800",
-    features: ["Complete tank cleaning", "Sanitization", "Sediment removal", "Water quality check"],
-    whatsappLink: "https://wa.me/919876543210?text=I'd%20like%20to%20book%20Water%20Tank%20Cleaning%20service"
-  },
-  {
-    id: 2,
-    name: "Water Pipe Cleaning",
-    description: "Professional cleaning of water pipelines to remove deposits and ensure clean water flow",
-    price: "₹1000",
-    features: ["Pipeline inspection", "High-pressure cleaning", "Deposit removal", "Flow optimization"],
-    whatsappLink: "https://wa.me/919876543210?text=I'd%20like%20to%20book%20Water%20Pipe%20Cleaning%20service"
-  },
-  {
-    id: 3,
-    name: "Furniture Repair",
-    description: "Expert repair services for all types of furniture including wood, metal, and upholstery",
-    price: "Starting at ₹500",
-    features: ["Wood restoration", "Hardware replacement", "Upholstery repair", "Custom modifications"],
-    whatsappLink: "https://wa.me/919876543210?text=I'd%20like%20to%20discuss%20Furniture%20Repair%20services"
-  },
-  {
-    id: 4,
-    name: "Deep Cleaning",
-    description: "Comprehensive cleaning service for entire homes or offices",
-    price: "Starting at ₹1500",
-    features: ["Floor cleaning", "Window cleaning", "Bathroom sanitization", "Kitchen deep clean"],
-    whatsappLink: "https://wa.me/919876543210?text=I'd%20like%20to%20book%20Deep%20Cleaning%20service"
-  },
-  {
-    id: 5,
-    name: "Furniture Assembly",
-    description: "Professional assembly of new furniture items with proper installation",
-    price: "Starting at ₹300",
-    features: ["Flat pack assembly", "Proper installation", "Hardware included", "Warranty on work"],
-    whatsappLink: "https://wa.me/919876543210?text=I'd%20like%20to%20book%20Furniture%20Assembly%20service"
-  },
-  {
-    id: 6,
-    name: "Custom Woodwork",
-    description: "Custom carpentry and woodwork solutions for your specific requirements",
-    price: "Custom Pricing",
-    features: ["Custom cabinets", "Built-in furniture", "Wood finishing", "Design consultation"],
-    whatsappLink: "https://wa.me/919876543210?text=I'd%20like%20to%20discuss%20Custom%20Woodwork%20services"
-  }
-];
+// Get services from centralized ContentManager - fetched dynamically
+function getServices() {
+  return ContentManager.getAllServices();
+}
 
 export default function Services() {
+  const [services, setServices] = useState<Service[]>(getServices());
+
+  // Subscribe to content updates
+  useEffect(() => {
+    const unsubscribe = subscribeToContentUpdates((update) => {
+      // Only refresh services if the update is for services
+      if (update.type === 'SERVICE') {
+        // Refresh services when any admin action occurs
+        setServices(getServices());
+        
+        // Show notification
+        const actionText = update.action === 'CREATE' ? 'added' : 
+                          update.action === 'UPDATE' ? 'updated' : 'deleted';
+        console.log(`Service ${update.data.name} has been ${actionText}`);
+      }
+    });
+    
+    return unsubscribe;
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-royal-blue-50 to-royal-silver-50">
       {/* Page Header */}
@@ -92,7 +68,7 @@ export default function Services() {
             <p className="royal-section-subtitle">Experience premium home services with unmatched quality and royal attention to detail</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service) => (
+            {services.map((service: Service) => (
               <div key={service.id} className="royal-card overflow-hidden group hover:-translate-y-2">
                 {/* Service Header */}
                 <div className="royal-gradient-blue p-6">
@@ -111,7 +87,7 @@ export default function Services() {
                   <div className="mb-8">
                     <h4 className="font-semibold text-royal-silver-800 mb-3">What's Included:</h4>
                     <ul className="text-sm text-royal-silver-600 space-y-2">
-                      {service.features.map((feature, index) => (
+                      {service.features.map((feature: string, index: number) => (
                         <li key={index} className="flex items-start">
                           <span className="text-royal-gold-500 mr-2 mt-1 text-lg">✓</span>
                           <span>{feature}</span>
@@ -190,7 +166,7 @@ export default function Services() {
             Experience our royal emergency repair services for urgent furniture and home maintenance needs with priority response
           </p>
           <a 
-            href="https://wa.me/919876543210?text=I%20need%20royal%20emergency%20repair%20services"
+            href="https://wa.me/918248198534?text=I%20need%20royal%20emergency%20repair%20services"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block bg-white text-royal-gold-700 font-bold py-4 px-8 rounded-xl hover:bg-royal-gold-50 transition-all duration-300 shadow-xl hover:shadow-2xl border-2 border-white"

@@ -1,7 +1,7 @@
 import type { Route } from "./+types/products";
 import { Link, useNavigate } from "react-router";
 import { useState, useEffect } from "react";
-import { ProductManager, subscribeToProductUpdates } from "../lib/products";
+import { ProductManager, subscribeToContentUpdates, type ContentUpdate, type ContentType } from "../lib/products";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -30,16 +30,19 @@ export default function Products() {
   const [products, setProducts] = useState(getProducts());
   const navigate = useNavigate();
 
-  // Subscribe to product updates
+  // Subscribe to content updates
   useEffect(() => {
-    const unsubscribe = subscribeToProductUpdates((action, product) => {
-      // Refresh products when any admin action occurs
-      setProducts(getProducts());
-      
-      // Show notification
-      const actionText = action === 'CREATE' ? 'added' : 
-                        action === 'UPDATE' ? 'updated' : 'deleted';
-      console.log(`Product ${product.name} has been ${actionText}`);
+    const unsubscribe = subscribeToContentUpdates((update) => {
+      // Only refresh products if the update is for products
+      if (update.type === 'PRODUCT') {
+        // Refresh products when any admin action occurs
+        setProducts(getProducts());
+        
+        // Show notification
+        const actionText = update.action === 'CREATE' ? 'added' : 
+                          update.action === 'UPDATE' ? 'updated' : 'deleted';
+        console.log(`Product ${update.data.name} has been ${actionText}`);
+      }
     });
     
     return unsubscribe;

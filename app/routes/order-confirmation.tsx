@@ -62,8 +62,8 @@ export default function OrderConfirmation() {
 
   // WhatsApp contact link
   const whatsappLink = orderData 
-    ? `https://wa.me/919876543210?text=Hello,%20I%20placed%20order%20${orderData.orderId}%20and%20would%20like%20to%20discuss%20further%20details.`
-    : 'https://wa.me/919876543210?text=Hello,%20I%20would%20like%20to%20discuss%20my%20order.';
+    ? `https://wa.me/918248198534?text=Hello,%20I%20placed%20order%20${orderData.orderId}%20and%20would%20like%20to%20discuss%20further%20details.`
+    : 'https://wa.me/918248198534?text=Hello,%20I%20would%20like%20to%20discuss%20my%20order.';
 
   if (!orderData) {
     return (

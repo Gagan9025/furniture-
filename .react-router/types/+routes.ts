@@ -46,6 +46,28 @@ type Pages = {
       "id": string;
     };
   };
+  "/admin/packages": {
+    params: {};
+  };
+  "/admin/packages/create": {
+    params: {};
+  };
+  "/admin/packages/edit/:id": {
+    params: {
+      "id": string;
+    };
+  };
+  "/admin/services": {
+    params: {};
+  };
+  "/admin/services/create": {
+    params: {};
+  };
+  "/admin/services/edit/:id": {
+    params: {
+      "id": string;
+    };
+  };
   "/api/admin/logout": {
     params: {};
   };
@@ -62,12 +84,22 @@ type Pages = {
       "id": string;
     };
   };
+  "/api/admin/packages/:id/delete": {
+    params: {
+      "id": string;
+    };
+  };
+  "/api/admin/services/:id/delete": {
+    params: {
+      "id": string;
+    };
+  };
 };
 
 type RouteFiles = {
   "root.tsx": {
     id: "root";
-    page: "/" | "/interior-designing" | "/services" | "/products" | "/cart" | "/order-confirmation" | "/admin/login" | "/admin/dashboard" | "/admin/products" | "/admin/products/create" | "/admin/products/edit/:id" | "/api/admin/logout" | "/api/admin/products" | "/api/admin/products/:id" | "/api/admin/products/:id/delete";
+    page: "/" | "/interior-designing" | "/services" | "/products" | "/cart" | "/order-confirmation" | "/admin/login" | "/admin/dashboard" | "/admin/products" | "/admin/products/create" | "/admin/products/edit/:id" | "/admin/packages" | "/admin/packages/create" | "/admin/packages/edit/:id" | "/admin/services" | "/admin/services/create" | "/admin/services/edit/:id" | "/api/admin/logout" | "/api/admin/products" | "/api/admin/products/:id" | "/api/admin/products/:id/delete" | "/api/admin/packages/:id/delete" | "/api/admin/services/:id/delete";
   };
   "routes/home.tsx": {
     id: "routes/home";
@@ -113,6 +145,30 @@ type RouteFiles = {
     id: "routes/admin/products/edit.$id";
     page: "/admin/products/edit/:id";
   };
+  "routes/admin/packages/index.tsx": {
+    id: "routes/admin/packages/index";
+    page: "/admin/packages";
+  };
+  "routes/admin/packages/create.tsx": {
+    id: "routes/admin/packages/create";
+    page: "/admin/packages/create";
+  };
+  "routes/admin/packages/edit.$id.tsx": {
+    id: "routes/admin/packages/edit.$id";
+    page: "/admin/packages/edit/:id";
+  };
+  "routes/admin/services/index.tsx": {
+    id: "routes/admin/services/index";
+    page: "/admin/services";
+  };
+  "routes/admin/services/create.tsx": {
+    id: "routes/admin/services/create";
+    page: "/admin/services/create";
+  };
+  "routes/admin/services/edit.$id.tsx": {
+    id: "routes/admin/services/edit.$id";
+    page: "/admin/services/edit/:id";
+  };
   "routes/api/admin/logout.ts": {
     id: "routes/api/admin/logout";
     page: "/api/admin/logout";
@@ -129,6 +185,14 @@ type RouteFiles = {
     id: "routes/api/admin/products.$id.delete";
     page: "/api/admin/products/:id/delete";
   };
+  "routes/api/admin/packages.$id.delete.ts": {
+    id: "routes/api/admin/packages.$id.delete";
+    page: "/api/admin/packages/:id/delete";
+  };
+  "routes/api/admin/services.$id.delete.ts": {
+    id: "routes/api/admin/services.$id.delete";
+    page: "/api/admin/services/:id/delete";
+  };
 };
 
 type RouteModules = {
@@ -144,8 +208,16 @@ type RouteModules = {
   "routes/admin/products/index": typeof import("./app/routes/admin/products/index.tsx");
   "routes/admin/products/create": typeof import("./app/routes/admin/products/create.tsx");
   "routes/admin/products/edit.$id": typeof import("./app/routes/admin/products/edit.$id.tsx");
+  "routes/admin/packages/index": typeof import("./app/routes/admin/packages/index.tsx");
+  "routes/admin/packages/create": typeof import("./app/routes/admin/packages/create.tsx");
+  "routes/admin/packages/edit.$id": typeof import("./app/routes/admin/packages/edit.$id.tsx");
+  "routes/admin/services/index": typeof import("./app/routes/admin/services/index.tsx");
+  "routes/admin/services/create": typeof import("./app/routes/admin/services/create.tsx");
+  "routes/admin/services/edit.$id": typeof import("./app/routes/admin/services/edit.$id.tsx");
   "routes/api/admin/logout": typeof import("./app/routes/api/admin/logout.ts");
   "routes/api/admin/products": typeof import("./app/routes/api/admin/products.ts");
   "routes/api/admin/products.$id": typeof import("./app/routes/api/admin/products.$id.ts");
   "routes/api/admin/products.$id.delete": typeof import("./app/routes/api/admin/products.$id.delete.ts");
+  "routes/api/admin/packages.$id.delete": typeof import("./app/routes/api/admin/packages.$id.delete.ts");
+  "routes/api/admin/services.$id.delete": typeof import("./app/routes/api/admin/services.$id.delete.ts");
 };

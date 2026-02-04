@@ -1,5 +1,8 @@
 import type { Route } from "./+types/interior-designing";
 import { Link } from "react-router";
+import { useState, useEffect } from "react";
+import { ContentManager, type Package } from "../lib/content-manager";
+import { subscribeToContentUpdates, type ContentUpdate, type ContentType } from "../lib/products";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -8,41 +11,32 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-// Interior design packages data
-const designPackages = [
-  {
-    id: 1,
-    name: "Basic Interior Package",
-    description: "Perfect for small spaces and budget-friendly solutions",
-    image: "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=400&h=300&fit=crop",
-    materials: ["Standard plywood", "Basic laminates", "Essential fittings"],
-    price: "₹45,000",
-    features: ["Space planning", "Basic design consultation", "Standard materials"],
-    whatsappLink: "https://wa.me/919876543210?text=I'm%20interested%20in%20Basic%20Interior%20Package"
-  },
-  {
-    id: 2,
-    name: "Premium Interior Package",
-    description: "Mid-range solution with better materials and design options",
-    image: "https://images.unsplash.com/photo-1616486029423-aaa4789e8c9a?w=400&h=300&fit=crop",
-    materials: ["Premium plywood", "High-grade laminates", "Designer fittings", "LED lighting"],
-    price: "₹85,000",
-    features: ["3D design visualization", "Material selection", "Professional installation"],
-    whatsappLink: "https://wa.me/919876543210?text=I'm%20interested%20in%20Premium%20Interior%20Package"
-  },
-  {
-    id: 3,
-    name: "Luxury Interior Package",
-    description: "High-end premium solutions with custom designs",
-    image: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=400&h=300&fit=crop",
-    materials: ["Marine ply", "Designer laminates", "Premium hardware", "Smart lighting", "Custom carpentry"],
-    price: "₹1,50,000",
-    features: ["Custom design", "Premium materials", "Project management", "Warranty included"],
-    whatsappLink: "https://wa.me/919876543210?text=I'm%20interested%20in%20Luxury%20Interior%20Package"
-  }
-];
+// Get packages from centralized ContentManager - fetched dynamically
+function getPackages() {
+  return ContentManager.getAllPackages();
+}
 
 export default function InteriorDesigning() {
+  const [packages, setPackages] = useState<Package[]>(getPackages());
+
+  // Subscribe to content updates
+  useEffect(() => {
+    const unsubscribe = subscribeToContentUpdates((update) => {
+      // Only refresh packages if the update is for packages
+      if (update.type === 'PACKAGE') {
+        // Refresh packages when any admin action occurs
+        setPackages(getPackages());
+        
+        // Show notification
+        const actionText = update.action === 'CREATE' ? 'added' : 
+                          update.action === 'UPDATE' ? 'updated' : 'deleted';
+        console.log(`Package ${update.data.name} has been ${actionText}`);
+      }
+    });
+    
+    return unsubscribe;
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-royal-gold-50 to-royal-blue-50">
       {/* Page Header */}
@@ -74,7 +68,7 @@ export default function InteriorDesigning() {
             <p className="royal-section-subtitle">Choose from our curated packages or request a custom royal design solution</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {designPackages.map((pkg) => (
+            {packages.map((pkg: Package) => (
               <div key={pkg.id} className="royal-card overflow-hidden group hover:-translate-y-2">
                 {/* Image */}
                 <div className="h-52 overflow-hidden relative">
@@ -95,7 +89,7 @@ export default function InteriorDesigning() {
                   <div className="mb-5">
                     <h4 className="font-semibold text-royal-silver-800 mb-2">Premium Materials:</h4>
                     <ul className="text-sm text-royal-silver-600 space-y-1">
-                      {pkg.materials.map((material, index) => (
+                      {pkg.materials.map((material: string, index: number) => (
                         <li key={index} className="flex items-center">
                           <span className="text-royal-gold-500 mr-2 text-lg">✓</span>
                           {material}
@@ -108,7 +102,7 @@ export default function InteriorDesigning() {
                   <div className="mb-6">
                     <h4 className="font-semibold text-royal-silver-800 mb-2">Royal Features:</h4>
                     <ul className="text-sm text-royal-silver-600 space-y-1">
-                      {pkg.features.map((feature, index) => (
+                      {pkg.features.map((feature: string, index: number) => (
                         <li key={index} className="flex items-center">
                           <span className="text-royal-blue-500 mr-2">•</span>
                           {feature}
@@ -155,7 +149,7 @@ export default function InteriorDesigning() {
             Have a unique royal vision? Our expert designers can create custom solutions tailored to your specific requirements and preferences with royal attention to detail.
           </p>
           <a 
-            href="https://wa.me/919876543210?text=I'd%20like%20to%20discuss%20a%20royal%20custom%20interior%20design%20project"
+            href="https://wa.me/918248198534?text=I'd%20like%20to%20discuss%20a%20royal%20custom%20interior%20design%20project"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block royal-btn-primary text-lg px-10 py-4 shadow-xl hover:shadow-2xl"

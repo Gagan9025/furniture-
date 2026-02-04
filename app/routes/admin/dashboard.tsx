@@ -1,6 +1,7 @@
 import { useLoaderData, redirect } from "react-router";
 import AdminLayout from "../../components/admin/AdminLayout";
 import { ProductManager } from "../../lib/products";
+import { ContentManager } from "../../lib/content-manager";
 import { AdminSession } from "../../lib/admin-auth";
 
 export async function loader() {
@@ -10,22 +11,32 @@ export async function loader() {
   
   const products = ProductManager.getAll();
   const categories = ProductManager.getCategories();
+  const packages = ContentManager.getAllPackages();
+  const services = ContentManager.getAllServices();
   
   return { 
     products,
     categories,
+    packages,
+    services,
     totalProducts: products.length,
     totalCategories: categories.length,
+    totalPackages: packages.length,
+    totalServices: services.length,
     totalValue: products.reduce((sum, product) => sum + product.price, 0)
   };
 }
 
 export default function AdminDashboard() {
-  const { products, categories, totalProducts, totalCategories, totalValue } = useLoaderData() as {
+  const { products, categories, packages, services, totalProducts, totalCategories, totalPackages, totalServices, totalValue } = useLoaderData() as {
     products: any[];
     categories: string[];
+    packages: any[];
+    services: any[];
     totalProducts: number;
     totalCategories: number;
+    totalPackages: number;
+    totalServices: number;
     totalValue: number;
   };
   
@@ -39,7 +50,7 @@ export default function AdminDashboard() {
         </div>
         
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <div className="bg-white rounded-2xl shadow-lg p-6 border border-royal-blue-100">
             <div className="flex items-center">
               <div className="p-3 rounded-xl bg-royal-blue-100">
@@ -72,6 +83,30 @@ export default function AdminDashboard() {
               <div className="ml-4">
                 <p className="text-royal-silver-600 text-sm">Total Value</p>
                 <p className="text-2xl font-bold text-royal-silver-800">₹{totalValue.toLocaleString()}</p>
+              </div>
+            </div>
+          </div>
+          
+          <div className="bg-white rounded-2xl shadow-lg p-6 border border-royal-blue-100">
+            <div className="flex items-center">
+              <div className="p-3 rounded-xl bg-royal-gold-100">
+                <span className="text-2xl">🎁</span>
+              </div>
+              <div className="ml-4">
+                <p className="text-royal-silver-600 text-sm">Design Packages</p>
+                <p className="text-2xl font-bold text-royal-silver-800">{totalPackages}</p>
+              </div>
+            </div>
+          </div>
+          
+          <div className="bg-white rounded-2xl shadow-lg p-6 border border-royal-blue-100">
+            <div className="flex items-center">
+              <div className="p-3 rounded-xl bg-royal-blue-100">
+                <span className="text-2xl">🔧</span>
+              </div>
+              <div className="ml-4">
+                <p className="text-royal-silver-600 text-sm">Services</p>
+                <p className="text-2xl font-bold text-royal-silver-800">{totalServices}</p>
               </div>
             </div>
           </div>

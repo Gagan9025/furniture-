@@ -1,5 +1,5 @@
 import { redirect } from "react-router";
-import { ProductManager, broadcastProductUpdate } from "../../../lib/products";
+import { ProductManager, broadcastContentUpdate } from "../../../lib/products";
 import { AdminSession } from "../../../lib/admin-auth";
 
 // POST - Delete product
@@ -18,7 +18,12 @@ export async function action({ params }: { params: { id: string } }) {
   
   // Broadcast update to all clients
   if (productToDelete) {
-    broadcastProductUpdate('DELETE', productToDelete);
+    broadcastContentUpdate({
+      type: 'PRODUCT',
+      action: 'DELETE',
+      data: productToDelete,
+      id: productToDelete.id
+    });
   }
   
   return { success: true };

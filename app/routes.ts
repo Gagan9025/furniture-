@@ -14,10 +14,18 @@ export default [
   route("admin/products", "routes/admin/products/index.tsx"),
   route("admin/products/create", "routes/admin/products/create.tsx"),
   route("admin/products/edit/:id", "routes/admin/products/edit.$id.tsx"),
+  route("admin/packages", "routes/admin/packages/index.tsx"),
+  route("admin/packages/create", "routes/admin/packages/create.tsx"),
+  route("admin/packages/edit/:id", "routes/admin/packages/edit.$id.tsx"),
+  route("admin/services", "routes/admin/services/index.tsx"),
+  route("admin/services/create", "routes/admin/services/create.tsx"),
+  route("admin/services/edit/:id", "routes/admin/services/edit.$id.tsx"),
   
   // Admin API routes
   route("api/admin/logout", "routes/api/admin/logout.ts"),
   route("api/admin/products", "routes/api/admin/products.ts"),
   route("api/admin/products/:id", "routes/api/admin/products.$id.ts"),
   route("api/admin/products/:id/delete", "routes/api/admin/products.$id.delete.ts"),
+  route("api/admin/packages/:id/delete", "routes/api/admin/packages.$id.delete.ts"),
+  route("api/admin/services/:id/delete", "routes/api/admin/services.$id.delete.ts"),
 ] satisfies RouteConfig;
