@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { useState, useEffect } from "react";
 import { ContentManager, type Service } from "../lib/content-manager";
 import { subscribeToContentUpdates, type ContentUpdate, type ContentType } from "../lib/products";
+import { useRealTimeUpdates } from "../lib/useRealTimeUpdates";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -36,6 +37,9 @@ export default function Services() {
     
     return unsubscribe;
   }, []);
+  
+  // Initialize real-time updates
+  useRealTimeUpdates();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-royal-blue-50 to-royal-silver-50">

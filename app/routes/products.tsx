@@ -2,6 +2,7 @@ import type { Route } from "./+types/products";
 import { Link, useNavigate } from "react-router";
 import { useState, useEffect } from "react";
 import { ProductManager, subscribeToContentUpdates, type ContentUpdate, type ContentType } from "../lib/products";
+import { useRealTimeUpdates, usePollingUpdates } from "../lib/useRealTimeUpdates";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -47,6 +48,9 @@ export default function Products() {
     
     return unsubscribe;
   }, []);
+  
+  // Initialize real-time updates
+  useRealTimeUpdates();
 
   // Add to cart function
   const addToCart = (product: typeof products[0]) => {

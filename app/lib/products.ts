@@ -1,4 +1,5 @@
 // Content data management
+import { ServerUpdateManager } from './server-updates';
 
 // Types for different content updates
 export type ContentType = 'PRODUCT' | 'PACKAGE' | 'SERVICE';
@@ -26,7 +27,12 @@ export function subscribeToContentUpdates(callback: ContentUpdateCallback) {
 
 export function broadcastContentUpdate(update: ContentUpdate) {
   updateCallbacks.forEach(callback => callback(update));
+  
+  // Send server-side update for cross-tab/cross-device synchronization
+  ServerUpdateManager.broadcast(update);
 }
+
+export { ServerUpdateManager };
 
 // Product data management
 
@@ -130,6 +136,14 @@ export class ProductManager {
       id: newProduct.id
     });
     
+    // Send server-side update for cross-tab/cross-device synchronization
+    ServerUpdateManager.broadcast({
+      type: 'PRODUCT',
+      action: 'CREATE',
+      data: newProduct,
+      id: newProduct.id
+    });
+    
     return newProduct;
   }
   
@@ -148,6 +162,14 @@ export class ProductManager {
       id: updatedProduct.id
     });
     
+    // Send server-side update for cross-tab/cross-device synchronization
+    ServerUpdateManager.broadcast({
+      type: 'PRODUCT',
+      action: 'UPDATE',
+      data: updatedProduct,
+      id: updatedProduct.id
+    });
+    
     return updatedProduct;
   }
   
@@ -160,6 +182,14 @@ export class ProductManager {
     if (success && deletedProduct) {
       // Broadcast update to all clients
       broadcastContentUpdate({
+        type: 'PRODUCT',
+        action: 'DELETE',
+        data: deletedProduct,
+        id: deletedProduct.id
+      });
+      
+      // Send server-side update for cross-tab/cross-device synchronization
+      ServerUpdateManager.broadcast({
         type: 'PRODUCT',
         action: 'DELETE',
         data: deletedProduct,

@@ -2,6 +2,7 @@
 
 import { broadcastContentUpdate } from './products';
 import type { Product, ContentUpdate, ContentType } from './products';
+import { ServerUpdateManager } from './server-updates';
 
 // Interfaces for different content types
 export interface Package {
@@ -135,6 +136,14 @@ export class ContentManager {
       id: newPackage.id
     });
     
+    // Send server-side update for cross-tab/cross-device synchronization
+    ServerUpdateManager.broadcast({
+      type: 'PACKAGE',
+      action: 'CREATE',
+      data: newPackage,
+      id: newPackage.id
+    });
+    
     return newPackage;
   }
   
@@ -153,6 +162,14 @@ export class ContentManager {
       id: updatedPackage.id
     });
     
+    // Send server-side update for cross-tab/cross-device synchronization
+    ServerUpdateManager.broadcast({
+      type: 'PACKAGE',
+      action: 'UPDATE',
+      data: updatedPackage,
+      id: updatedPackage.id
+    });
+    
     return updatedPackage;
   }
   
@@ -165,6 +182,14 @@ export class ContentManager {
     if (success && deletedPackage) {
       // Broadcast update to all clients
       broadcastContentUpdate({
+        type: 'PACKAGE',
+        action: 'DELETE',
+        data: deletedPackage,
+        id: deletedPackage.id
+      });
+      
+      // Send server-side update for cross-tab/cross-device synchronization
+      ServerUpdateManager.broadcast({
         type: 'PACKAGE',
         action: 'DELETE',
         data: deletedPackage,
@@ -197,6 +222,14 @@ export class ContentManager {
       id: newService.id
     });
     
+    // Send server-side update for cross-tab/cross-device synchronization
+    ServerUpdateManager.broadcast({
+      type: 'SERVICE',
+      action: 'CREATE',
+      data: newService,
+      id: newService.id
+    });
+    
     return newService;
   }
   
@@ -215,6 +248,14 @@ export class ContentManager {
       id: updatedService.id
     });
     
+    // Send server-side update for cross-tab/cross-device synchronization
+    ServerUpdateManager.broadcast({
+      type: 'SERVICE',
+      action: 'UPDATE',
+      data: updatedService,
+      id: updatedService.id
+    });
+    
     return updatedService;
   }
   
@@ -227,6 +268,14 @@ export class ContentManager {
     if (success && deletedService) {
       // Broadcast update to all clients
       broadcastContentUpdate({
+        type: 'SERVICE',
+        action: 'DELETE',
+        data: deletedService,
+        id: deletedService.id
+      });
+      
+      // Send server-side update for cross-tab/cross-device synchronization
+      ServerUpdateManager.broadcast({
         type: 'SERVICE',
         action: 'DELETE',
         data: deletedService,
