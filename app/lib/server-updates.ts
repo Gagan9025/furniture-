@@ -1,6 +1,8 @@
 // Server-side update utilities for real-time synchronization
 // This file handles server-side broadcasting of content updates
 
+import { simulateServerUpdate } from './websocket-connection';
+
 declare global {
   var connections: Set<any>;
 }
@@ -35,8 +37,11 @@ export class ServerUpdateManager {
   static async broadcast(update: any) {
     // In a real implementation, send to server endpoint
     try {
-      // Send update to server API endpoint that will broadcast to all clients via SSE
-      const response = await fetch('/api/updates', {
+      // For development environment, use simulated server update
+      simulateServerUpdate(update);
+      
+      // Also try to send to server API endpoint that will broadcast to all clients via SSE
+      /*const response = await fetch('/api/updates', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -46,7 +51,7 @@ export class ServerUpdateManager {
       
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
-      }
+      }*/
     } catch (error) {
       console.error('Failed to broadcast update to server:', error);
       // Fallback: broadcast locally if server broadcast fails

@@ -31,6 +31,9 @@ export default function Products() {
   const [products, setProducts] = useState(getProducts());
   const navigate = useNavigate();
 
+  // Initialize real-time updates
+  useRealTimeUpdates();
+  
   // Subscribe to content updates
   useEffect(() => {
     const unsubscribe = subscribeToContentUpdates((update) => {
@@ -48,9 +51,6 @@ export default function Products() {
     
     return unsubscribe;
   }, []);
-  
-  // Initialize real-time updates
-  useRealTimeUpdates();
 
   // Add to cart function
   const addToCart = (product: typeof products[0]) => {

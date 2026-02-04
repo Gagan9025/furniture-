@@ -20,6 +20,9 @@ function getServices() {
 export default function Services() {
   const [services, setServices] = useState<Service[]>(getServices());
 
+  // Initialize real-time updates
+  useRealTimeUpdates();
+  
   // Subscribe to content updates
   useEffect(() => {
     const unsubscribe = subscribeToContentUpdates((update) => {
@@ -37,9 +40,6 @@ export default function Services() {
     
     return unsubscribe;
   }, []);
-  
-  // Initialize real-time updates
-  useRealTimeUpdates();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-royal-blue-50 to-royal-silver-50">

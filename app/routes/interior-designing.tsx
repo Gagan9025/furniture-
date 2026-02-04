@@ -20,6 +20,9 @@ function getPackages() {
 export default function InteriorDesigning() {
   const [packages, setPackages] = useState<Package[]>(getPackages());
 
+  // Initialize real-time updates
+  useRealTimeUpdates();
+  
   // Subscribe to content updates
   useEffect(() => {
     const unsubscribe = subscribeToContentUpdates((update) => {
@@ -37,9 +40,6 @@ export default function InteriorDesigning() {
     
     return unsubscribe;
   }, []);
-  
-  // Initialize real-time updates
-  useRealTimeUpdates();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-royal-gold-50 to-royal-blue-50">
